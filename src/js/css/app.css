@@ -1,0 +1,276 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  outline: none;
+}
+
+h4{
+  color: rgb(255, 255, 255);
+}
+
+body{
+  overflow-x: hidden;
+}
+
+.app{
+  text-align: center;
+  position: relative;
+  min-height: 100vh;
+  
+}
+
+.button{
+  padding: 0.4rem 0.4rem;
+  outline: none;
+  background: rgb(255, 255, 255);
+  border:1px solid rgb(185, 165, 187);
+  border-radius: 0.3rem;
+
+
+}
+.button:hover{
+
+  background: rgb(112, 111, 111);
+  border:1px solid transparent;
+  color: white;
+}
+
+a{
+  text-decoration: none;
+  color: #000;
+}
+
+ul{
+  list-style-type: none;
+}
+
+.small{
+  font-size: 0.7rem;
+  color: rgb(49, 49, 49);
+}
+
+/********* Header and main start **********/
+
+
+.navbar{
+  display: flex;
+  justify-content:space-around;
+  padding: 1rem ;
+  background:rgb(255, 255, 255);
+  flex-wrap: wrap;
+  border: 1px solid rgb(241, 241, 241);
+}
+
+
+
+.brandname a{
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+.navlinks{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.navlinks li{
+  margin: 0.3rem 1rem;
+
+}
+
+.navlinks li .links{
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.navlinks li .linkname:hover{
+  font-family:'Courier New', Courier, monospace;
+  font-weight: bold;
+  
+}
+
+.linkname{
+  font-size: 1rem;
+  padding:0.3rem 0rem;
+}
+
+.fontawesome{
+  display: none;
+}
+
+.main{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background: linear-gradient(-90deg,white, white,rgb(194, 154, 209));
+
+}
+
+.textdiv{
+  margin: 0rem auto;
+  max-width: 390px;
+  height: 300px;
+  padding-top:4rem ;
+  color: rgb(44, 44, 44);
+}
+
+.imgdiv{
+  margin: 4rem auto;
+  width: 300px;
+  position: relative;
+
+}
+.imgdiv img{
+  width: 100%;
+}
+/*\\\\\\\\\\\\\\\\ Header and main end \\\\\\\\\\\\\\\\\***/
+
+/************ Search start *******************/
+.search{
+  position: absolute;
+  top:400px; 
+  width: 100%; 
+ 
+}
+
+.searchbox{
+  max-width: 500px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);  
+  display: grid;
+  grid-template-columns: 80% 40px;
+  margin: 0 3rem 0 0.3rem;
+}
+
+.searchtab{
+  padding: 0.4rem 1rem;
+  border-radius: 0.1rem;
+  border: 1px solid rgb(172, 137, 204);
+}
+
+.searchbox button{
+  background: rgb(133, 98, 130);
+  margin: 0;
+  padding: 0;
+  border: 1px solid purple;
+}
+
+.fa-search{
+  padding: 0.6rem;
+  outline: none;
+  background: rgb(133, 98, 130);
+  border-radius: 0.1rem;
+  color: white;
+
+}
+.fa-search:hover{
+  color: rgb(2, 221, 166);
+  font-size: 1.1rem;
+  padding: 0.5rem;
+
+}
+
+
+
+/*\\\\\\\\\\\\\\\\ Search end \\\\\\\\\\\\\\\\\\\\\\\\\\*/
+
+/****************** Images start ************************/
+.carousels{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background: rgb(255, 255, 255);
+}
+
+.image2{
+  width: 290px;
+  height:220px;
+  object-fit: cover;
+  margin: 1rem;
+  border: 1px solid rgb(226, 226, 226);
+  overflow: hidden;
+}
+
+
+.image2 img{
+  width:100%;
+  object-fit: contain;
+
+}
+
+/*******Footer starts******/
+
+.footerup{
+  padding-bottom: 10rem;
+}
+
+.footer{
+  margin-top: 2rem;
+  background: linear-gradient(rgb(65, 64, 64),gray);
+  color: white;
+  position: absolute;
+  bottom:0;
+  width: 100%;
+}
+
+.footer p{
+  color: rgb(228, 228, 228);
+}
+
+.footergrid{
+  text-align: center;
+  display: grid;
+  grid-template-columns:50% 50% ;
+  box-shadow: 0px 1px 2px rgb(109, 109, 109);
+}
+
+.copyright{
+  width: 100%;
+  text-align: center;
+  padding: 0.2rem 0;
+
+}
+
+/*\\\\\\\\\\\ Footer ends\\\\\\\\\\\\\*/
+
+/*\\\\\\\\\\\\\\\\\ images end \\\\\\\\\\\\\\\\\*/
+
+
+
+
+
+
+
+@media only screen and (max-width:725px){
+    .main{
+      display: block;
+      background: linear-gradient(0deg,white, white,rgb(151, 108, 168));
+
+    }
+    .navlinks li{
+      margin: 0rem 1.2rem -1rem 1.2rem;
+      padding: 0.1rem 0rem;
+    }
+    .navlinks li .links:hover{
+      border:none;
+    }
+    .navlinks li .links{
+      border:none;
+    }
+    .linkname{
+      font-size: 0.6rem;
+      font-family: 'Courier New', Courier, monospace;
+      
+    }
+    .fontawesome{
+      display: block;
+      font-size: 2rem;
+    }
+    .navlinks li .links:hover > .fontawesome{
+      color: rgb(46, 206, 6);
+    }
+
+    
+    
+}
