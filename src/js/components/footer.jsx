@@ -6,21 +6,21 @@ function Footer(props) {
         <div className="container">
             <div className="row justify-content-center"> 
                 <div className="col-5 col-sm-2 ">
-                    <h5 className="footer-brandname"><a href="#">Ap company</a></h5>
+                    <h5 className="footer-brandname"><a href=" ">Ap company</a></h5>
                     <ul>
-                        <li><a href="#">Our goals</a> </li>
-                        <li><a href="#">Blogs</a> </li>
-                        <li><a href="#">Report something</a> </li>
-                        <li><a href="#">help</a> </li>
-                        <li><a href="#">about us</a> </li>
+                        <li><a href=" ">Our goals</a> </li>
+                        <li><a href=" ">Blogs</a> </li>
+                        <li><a href=" ">Report something</a> </li>
+                        <li><a href=" ">help</a> </li>
+                        <li><a href=" ">about us</a> </li>
                     </ul>
                 </div>            
                 <div className="col-5 col-sm-2 text-center">
                     <h5>Links</h5>
                     <ul className="list-unstyled">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Menu</a></li>
+                        <li><a href=" ">Home</a></li>
+                        <li><a href=" ">About</a></li>
+                        <li><a href=" ">Menu</a></li>
                         <li><a href="contactus.html">Contact</a></li>
                     </ul>
                 </div>

@@ -3,8 +3,32 @@
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   outline: none;
-  color: #000;
 }
+
+.jumbotron{
+  padding: 2.5rem;
+}
+
+.homecardtitle{
+  font-weight: bold;
+}
+.homecardsubstitle{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+nav{
+  border: 1px solid rgb(219, 217, 217);
+}
+
+.nav-item{
+  margin:0 0.3rem ;
+}
+
+.nav-item :hover{
+  background: rgb(192, 192, 192);
+}
+
 
 .header .navbar-dark h4{
   color: rgb(221, 221, 221);
@@ -76,16 +100,11 @@ ul{
 }
 
 .footer{
-  background-color: rgb(170, 161, 184);
+  background-color: rgb(200, 193, 212);
   margin:0px auto;
   padding: 20px 0px 20px 0px;
 }
-.jumbotron {
-  padding:70px 30px 70px 30px;
-  margin:0px auto;
-  background: #9575CD ;
-  color:floralwhite;
-}
+
 
 address{
   font-size:80%;
@@ -112,7 +131,9 @@ address{
 
 
 
-
+.dishes{
+  margin: 1rem auto ;
+}
 
 
 
@@ -121,5 +142,9 @@ address{
 /*******************************/
 .footer-brandname{
   font-weight: bold;
+  font-family: cursive;
+}
+.footer ul li a{
+  font-weight: 100;
   font-family: cursive;
 }

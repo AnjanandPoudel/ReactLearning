@@ -19,27 +19,28 @@ function RenderImage(dish){
 }
 
 
-function RenderComment(dish){
+function RenderComment(item){
+    console.log(item)
 
-    if (dish!==undefined && dish!==null){
-        console.log(dish)
-        let comments=dish.comments.map((item)=>{
+
+    if (item!==undefined && item!==null){
+        
         return(
                 <CardBody key={item.id}>
                     <CardText>{item.comment} </CardText>
                     <CardText>  -- {item.author} , {new Intl.DateTimeFormat('en-US' ,{year:'numeric',month:"short",day:"2-digit",hour:"numeric"}).format(new Date(Date.parse(item.date)))} </CardText>
                 </CardBody>
         )
-        })
+    }
     return(
         <div>
             <h2>Comments:</h2>
-            {comments}
+            {item}
         </div>
     )
 
-    }
 }
+
 
 
 function DishdetailComponent(props){
@@ -52,7 +53,7 @@ function DishdetailComponent(props){
                     {RenderImage(props.dish)}
                 </div>
                 <div className="col-12 col-md-5 m-1 ">
-                    {RenderComment(props.dish)}
+                    {RenderComment(props.comment)}
                 </div>
             </div>
         </div>
