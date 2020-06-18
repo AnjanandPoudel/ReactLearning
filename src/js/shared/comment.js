@@ -52,7 +52,7 @@ export const COMMENTS =
         id: 6,
         dishId: 1,
         rating: 4,
-        comment: "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
+        comment: " it has id 1 Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
         author: "Paul McVites",
         date: "2014-09-05T17:57:28.556094Z"
     },
@@ -84,7 +84,7 @@ export const COMMENTS =
         id: 10,
         dishId: 2,
         rating: 5,
-        comment: "Imagine all the eatables, living in conFusion!",
+        comment: "id==2",
         author: "John Lemon",
         date: "2012-10-16T17:57:28.556094Z"
     },
