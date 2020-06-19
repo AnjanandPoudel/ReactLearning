@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import { Breadcrumb,BreadcrumbItem,Form,Input,Col,FormGroup,Label,Button } from 'reactstrap';
+import { Breadcrumb,BreadcrumbItem,Form,Input,Col,FormGroup,Label,Button,FormFeedback } from 'reactstrap';
 import {Link  } from 'react-router-dom';
 
 
@@ -44,10 +44,38 @@ class Contact extends Component {
             email:'',
             rememberme:false,
             message:'',
-            contacttype:''
+            contacttype:'',
+            touched:{
+                firstname:false,
+                lastname:false,
+                telnum:false,
+                email:false
+            }
         }
         this.handleSubmit=this.handleSubmit.bind(this)
         this.handleInputChange=this.handleInputChange.bind(this)
+        this.validate=this.validate.bind(this)
+    }
+
+    handleBlur=(field)=>(evt)=>{
+        this.setState({
+            touched:{...this.state.touched , [field]:true }
+        })
+    }
+
+    validate(firstname,lastname,email,telnum){
+        const errors={
+            firstname:'',
+            lastname:'',
+            telnum:'',
+            email:''
+        }
+        const reg=/^\d+$/;
+        errors.firstname= this.state.touched.firstname && firstname.length <=2 ? 'Not valid' : '';
+        errors.lastname= this.state.touched.lastname && lastname.length <=2 ? 'Not valid' : '';
+        errors.telnum= this.state.touched.telnum && !reg.test(telnum) ? "Characters not allowed" : '';
+        errors.email= this.state.touched.email && email.split('').filter(x=>x==='@').length !==1 ? 'Not valid, @ required':''
+        return(errors)
     }
 
     handleInputChange(event){
@@ -66,6 +94,8 @@ class Contact extends Component {
     }
 
     render(){
+        const validate=this.validate(this.state.firstname,this.state.lastname,this.state.email,this.state.telnum)
+        console.log(validate)
         return(
             <div className="container">
                 <div className="row">
@@ -109,9 +139,12 @@ class Contact extends Component {
                             <Col md={10}>
                                 <Input type="text" placeholder="firstname" id="firstname" name="firstname"
                                     value={this.state.firstname}
+                                    onBlur={this.handleBlur('firstname')}
                                     onChange={this.handleInputChange}
-
+                                    valid={validate.firstname.length>=1}
+                                    invalid={validate.firstname!==''}
                                     />
+                                    <FormFeedback>{validate.firstname}</FormFeedback>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
@@ -119,8 +152,12 @@ class Contact extends Component {
                             <Col md={10}>
                                 <Input type="text" placeholder="lastname" id="lastname" name="lastname"
                                     value={this.state.lastname}
+                                    valid={validate.lastname.length>=1}
+                                    onBlur={this.handleBlur('lastname')}
+                                    invalid={validate.lastname!==''}
                                     onChange={this.handleInputChange}
                                     />
+                                    <FormFeedback>{validate.lastname}</FormFeedback>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
@@ -128,8 +165,12 @@ class Contact extends Component {
                             <Col md={10}>
                                 <Input type="tel" placeholder="telnum" id="telnum" name="telnum"
                                     value={this.state.telnum}                                    onChange={this.handleInputChange}
+                                    onBlur={this.handleBlur('telnum')}
+                                    valid={validate.telnum.length>=1}
+                                    invalid={validate.telnum!==''}
 
                                     />
+                                    <FormFeedback>{validate.telnum}</FormFeedback>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
@@ -137,8 +178,11 @@ class Contact extends Component {
                             <Col md={10}>
                                 <Input type="email" placeholder="example@example.com" id="email" name="email"
                                     value={this.state.email}                                    onChange={this.handleInputChange}
+                                    valid={validate.email.length>=1}
+                                    invalid={validate.email!==''}                                    onBlur={this.handleBlur('email')}
 
                                     />
+                                    <FormFeedback>{validate.email}</FormFeedback>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
@@ -148,7 +192,9 @@ class Contact extends Component {
                                         <Input type="checkbox" 
                                             name="rememberme" 
                                             checked={this.state.rememberme} 
-                                            onChange={this.handleInputChange} 
+                                            onChange={this.handleInputChange}
+                                            valid={validate.firstname.length>=1}
+                                            invalid={validate.firstname!==''} 
                                         />
                                          {' '} <strong> Remember Me </strong>
                                 </Label>

@@ -48,6 +48,7 @@ function RenderComment(comments){
 
 
 function DishdetailComponent(props){
+    console.log(props.dish)
     if(props!==null){
         
         return(
