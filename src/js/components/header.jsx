@@ -78,20 +78,7 @@ class Header extends Component{
                     </div>
                 </Navbar>
                 
-                <div className="jumbotron black" >
-                    <div className="container ">
-                        <div className="row row-header">
-                            <div className="col-12 col-md-8">
-                                <h1>Anjan Poudel</h1>
-                                <p>This is  a paragraph. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, tent control the form that
-                                it renders:
-                                – Single source of truth
-                                – Tying the form state to component statetur modi in consequuntur, doloremque sapiente illum quis maiores sequi aliquid neque odit aliquam veritatis. Quasi dolor sed ex dignissimos ipsa.</p>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            
 
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal} >
                     <ModalHeader  toggle={this.toggleModal}>
