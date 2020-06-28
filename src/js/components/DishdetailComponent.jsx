@@ -4,7 +4,7 @@ import {Breadcrumb,BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom'
 import { Component } from 'react';
 import { LocalForm, Control, Errors } from 'react-redux-form';
-import { addComment } from '../redux/action';
+import { addComment } from '../redux/ActionCreators';
 
 
 class CommentForm extends Component{

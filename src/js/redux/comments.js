@@ -1,10 +1,10 @@
 import {COMMENTS} from '../shared/comment';
-import { actionTypes } from 'react-redux-form';
+import * as ActionTypes from './ActionTypes';
 
 
 export const Comments=(state=COMMENTS,action)=>{
     switch(action.type){
-        case actionTypes.add_comment:
+        case ActionTypes.ADD_COMMENT:
             let comment=action.payload;
             comment.id=state.length;
             comment.date=new Date().toISOString();
@@ -16,3 +16,6 @@ export const Comments=(state=COMMENTS,action)=>{
             return state
     }
 }
+
+
+

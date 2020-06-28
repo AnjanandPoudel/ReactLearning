@@ -11,7 +11,7 @@ import DishdetailComponent from './DishdetailComponent';
 import {Switch ,Route ,Redirect,withRouter} from 'react-router-dom';
 import { connect } from "react-redux";
 
-import { addComment } from '../redux/action'
+import { addComment } from '../redux/ActionCreators'
 
 
 //changes states to props

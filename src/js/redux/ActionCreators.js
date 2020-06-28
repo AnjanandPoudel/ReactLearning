@@ -1,12 +1,10 @@
-//action types
-export const add_comment='ADD_COMMENT'
 
-
+import * as ActionTypes from './ActionTypes';
 
 // Action creators
 export const addComment=(dishId,rating,author,comment)=>(
     {
-    type:add_comment,
+    type:ActionTypes.ADD_COMMENT,
     payload:{
         dishId:dishId,
         rating:rating,
