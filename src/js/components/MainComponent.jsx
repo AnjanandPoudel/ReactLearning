@@ -11,6 +11,9 @@ import DishdetailComponent from './DishdetailComponent';
 import {Switch ,Route ,Redirect,withRouter} from 'react-router-dom';
 import { connect } from "react-redux";
 
+import { addComment } from '../redux/action'
+
+
 //changes states to props
 const mapStateToProps=state=>{
     return{
@@ -18,8 +21,16 @@ const mapStateToProps=state=>{
         comment:state.comments,
         promotion:state.promotions,
         leader:state.leaders
+        // used here as props: imported from redux as states
     }
 }
+
+const mapDispatchToProps=dispatch=>({
+    addComment:(dishId,rating,author,comment)=>dispatch((addComment(dishId,rating,author,comment)))
+}
+)
+
+
 
 class Main extends Component{
 
@@ -48,6 +59,7 @@ class Main extends Component{
                 <div className="">
                     <DishdetailComponent dish={this.props.dishes.filter((item)=> item.id === parseInt(match.params.dishId,10))[0] }
                     comment={this.props.comment.filter((item)=>item.dishId===parseInt(match.params.dishId,10))}
+                    addComment={this.props.addComment}
                     />
                 </div>
             )
@@ -57,7 +69,6 @@ class Main extends Component{
     return(
         <div className="">
             <Header />
-            
             <Switch>
                 <Route path="/home" component={HomePage} ></Route>
                 <Route exact path="/menu" component={()=> <Menu dishes={this.props.dishes} /> }></Route>
@@ -78,6 +89,6 @@ class Main extends Component{
     }
 }
 
-export default withRouter(connect(mapStateToProps)(Main)); //connest takes mapStatetoprops as a parameter and withRouter is used because React router is used here.
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Main)); //connest takes mapStatetoprops and mapDispatchtoprops as a parameter and withRouter is used because React router is used here.
 
 

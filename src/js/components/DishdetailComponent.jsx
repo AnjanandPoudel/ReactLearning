@@ -4,6 +4,7 @@ import {Breadcrumb,BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom'
 import { Component } from 'react';
 import { LocalForm, Control, Errors } from 'react-redux-form';
+import { addComment } from '../redux/action';
 
 
 class CommentForm extends Component{
@@ -22,8 +23,10 @@ class CommentForm extends Component{
     }
 
     handleSubmit=(values)=>{
-        alert("Current state is: ( "+JSON.stringify(values)+" )")
-        this.toggleModal()
+        this.toggleModal();
+        this.props.addComment(this.props.dishId,values.rating,values.name,values.comment)
+        console.log(addComment(this.props.dishId,values.rating,values.name,values.comment))
+
     }
 
     render(){
@@ -53,6 +56,7 @@ class CommentForm extends Component{
                                 <Col md={12}>
                                     <Control.select model=".rating" id="rating" name="rating" 
                                     className="form-control"  required>
+                                        <option>please choose</option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -117,7 +121,7 @@ function RenderImage(dish){
 }
 
 
-function RenderComment(comments){
+function RenderComment({comments,dishId,addComment}){
     console.log(comments)
     let item
 
@@ -136,12 +140,11 @@ function RenderComment(comments){
         <div>
             <h2>Comments:</h2>
             {item}
-            <CommentForm />
+            <CommentForm dishId={dishId}  addComment={addComment}  />
         </div>
     )
 
 }
-
 
 
 function DishdetailComponent(props){
@@ -162,7 +165,7 @@ function DishdetailComponent(props){
                     {RenderImage(props.dish)}
                 </div>
                 <div className="col-12 col-md-5 m-1 ">
-                    {RenderComment(props.comment)}
+                    <RenderComment comments={props.comment} dishId={props.dish.id} addComment={props.addComment} />
                 </div>
             </div>
         </div>
