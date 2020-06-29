@@ -10,12 +10,13 @@ export const ConfigureStore=()=>{
     const store=createStore(
         combineReducers(
             {
-                dishes:Dishes,
-                comments:Comments,
-                leaders:Leaders,
-                promotions:Promotions
+                con_dishes:Dishes,
+                con_comments:Comments,
+                con_leaders:Leaders,
+                con_promotions:Promotions
             }
         )
     );
     return store
 }
+

@@ -24,7 +24,6 @@ function RenderImage({item}){
             </div>
        
     )
-    
 }
 
 function Home(props){

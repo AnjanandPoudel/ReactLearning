@@ -1,32 +1,31 @@
-import React,{Component} from 'react'
+import React,{Component} from 'react';
 import Menu from './MenuComponent';
-
 import Header from './header';
 import Footer from './footer';
 import Home from './HomeComponent';
 import About from './AboutComponent';
 import Contact from './contact';
 import DishdetailComponent from './DishdetailComponent';
-
 import {Switch ,Route ,Redirect,withRouter} from 'react-router-dom';
 import { connect } from "react-redux";
 
-import { addComment } from '../redux/ActionCreators'
+import { addComment } from '../redux/action';
 
 
 //changes states to props
+// connects to ConfigureStore
 const mapStateToProps=state=>{
     return{
-        dishes:state.dishes,
-        comment:state.comments,
-        promotion:state.promotions,
-        leader:state.leaders
+        dishes:state.con_dishes,
+        comment:state.con_comments,
+        promotion:state.con_promotions,
+        leader:state.con_leaders
         // used here as props: imported from redux as states
     }
 }
 
-const mapDispatchToProps=dispatch=>({
-    addComment:(dishId,rating,author,comment)=>dispatch((addComment(dishId,rating,author,comment)))
+const mapDispatchToProps=my_dispatched=>({
+    cmt:(dishId,rating,author,comment)=>my_dispatched((addComment(dishId,rating,author,comment)))
 }
 )
 
@@ -59,7 +58,7 @@ class Main extends Component{
                 <div className="">
                     <DishdetailComponent dish={this.props.dishes.filter((item)=> item.id === parseInt(match.params.dishId,10))[0] }
                     comment={this.props.comment.filter((item)=>item.dishId===parseInt(match.params.dishId,10))}
-                    addComment={this.props.addComment}
+                    addComment={this.props.cmt}
                     />
                 </div>
             )

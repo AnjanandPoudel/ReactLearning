@@ -4,7 +4,7 @@ import {Breadcrumb,BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom'
 import { Component } from 'react';
 import { LocalForm, Control, Errors } from 'react-redux-form';
-import { addComment } from '../redux/ActionCreators';
+import { addComment } from '../redux/action';
 
 
 class CommentForm extends Component{
@@ -123,9 +123,7 @@ function RenderImage(dish){
 
 function RenderComment({comments,dishId,addComment}){
     console.log(comments)
-    let item
-
-
+    let item;
     if (comments!==undefined && comments!==null){
         item=comments.map(item=>{
         return(
@@ -140,12 +138,10 @@ function RenderComment({comments,dishId,addComment}){
         <div>
             <h2>Comments:</h2>
             {item}
-            <CommentForm dishId={dishId}  addComment={addComment}  />
+            <CommentForm dishId={dishId} addComment={addComment}  />
         </div>
     )
-
 }
-
 
 function DishdetailComponent(props){
     console.log(props.dish)
