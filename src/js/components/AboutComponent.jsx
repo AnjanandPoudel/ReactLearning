@@ -41,7 +41,6 @@ function About(props) {
         );
     });
 
-    console.log(props.leaders)
 
     return(
         <div className="container">

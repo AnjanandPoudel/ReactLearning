@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import { Component } from 'react';
 import { LocalForm, Control, Errors } from 'react-redux-form';
 import { addComment } from '../redux/action';
+import Loading from "./loading";
 
 
 class CommentForm extends Component{
@@ -104,8 +105,25 @@ class CommentForm extends Component{
 }
 
 
-function RenderImage(dish){
-    if (dish!==undefined && dish!==null){
+function RenderImage(dish,loading,error){
+
+    if(loading){
+        return(
+            <div className=""><Loading /></div>
+        )
+    }
+    else if(error){
+        return(
+            <div className="container">
+                <div className="row">
+                    <h3>Some error has occured</h3>
+                    <p>{error}</p>
+                </div>
+            </div>
+        )
+    }
+
+    else if (dish!==undefined && dish!==null){
             return(
                 <Card >
                     <CardImg width="100%" src={dish.image} alt={dish.name} />
@@ -118,12 +136,19 @@ function RenderImage(dish){
                 
             )
     }
+    else{
+        return(
+            <div className=""></div>
+        )
+    }
 }
 
 
 function RenderComment({comments,dishId,addComment}){
     console.log(comments)
     let item;
+
+
     if (comments!==undefined && comments!==null){
         item=comments.map(item=>{
         return(
@@ -134,6 +159,11 @@ function RenderComment({comments,dishId,addComment}){
         )
         })
     }
+
+    
+
+
+
     return(
         <div>
             <h2>Comments:</h2>
@@ -145,7 +175,8 @@ function RenderComment({comments,dishId,addComment}){
 
 function DishdetailComponent(props){
     console.log(props.dish)
-    if(props!==null){
+    
+    if(props!==null && props!==undefined){
         
         return(
         <div className="container">
@@ -158,7 +189,7 @@ function DishdetailComponent(props){
             </div>
             <div className=" row">
                 <div className="col-12 col-md-5 m-1">
-                    {RenderImage(props.dish)}
+                    {RenderImage(props.dish,props.loadingStatus,props.error)}
                 </div>
                 <div className="col-12 col-md-5 m-1 ">
                     <RenderComment comments={props.comment} dishId={props.dish.id} addComment={props.addComment} />

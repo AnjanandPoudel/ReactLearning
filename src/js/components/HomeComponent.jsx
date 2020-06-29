@@ -1,29 +1,46 @@
 import React from 'react';
 import {Card,CardBody,CardTitle,CardText,CardImg, CardSubtitle} from 'reactstrap';
 import {Breadcrumb,BreadcrumbItem} from 'reactstrap';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import Loading from "./loading";
 
 
 
 
-function RenderImage({item}){
-    return(
-       
-            <div className="">
-                <Card>
-                    
-                    <CardImg src={item.image}  />
-                    <CardBody>
-                        <CardTitle className="homecardtitle" > {item.name} </CardTitle>
-                        { item.designation ? <CardSubtitle  className="homecardsubstitle" > {item.designation} </CardSubtitle>:null }
-                        <CardText>{item.description} </CardText>
-                    </CardBody>
-                    
-                </Card>
-                
+function RenderImage({item,loading,error}){
+    if(loading){
+        return(
+            <div className=""><Loading /></div>
+        )
+    }
+    else if(error){
+        return(
+            <div className="container">
+                <div className="row">
+                    <h3>Some error has occured</h3>
+                    <p>{error}</p>
+                </div>
             </div>
-       
-    )
+        )
+    }
+    else
+        {return(
+        
+                <div className="">
+                    <Card>
+                        
+                        <CardImg src={item.image}  />
+                        <CardBody>
+                            <CardTitle className="homecardtitle" > {item.name} </CardTitle>
+                            { item.designation ? <CardSubtitle  className="homecardsubstitle" > {item.designation} </CardSubtitle>:null }
+                            <CardText>{item.description} </CardText>
+                        </CardBody>
+                        
+                    </Card>
+                    
+                </div>
+        
+        )}
 }
 
 function Home(props){
@@ -52,7 +69,7 @@ function Home(props){
             
             <div className="row">
                 <div className="col-12 col-sm-4">
-                    <RenderImage item={props.dish[0]} />
+                    <RenderImage item={props.dish[0]} loading={props.loadingStatus} error={props.error} />
                 </div>
                 <div className="col-12 col-sm-4">
                     <RenderImage item={props.promo[0]} />

@@ -9,7 +9,8 @@ import DishdetailComponent from './DishdetailComponent';
 import {Switch ,Route ,Redirect,withRouter} from 'react-router-dom';
 import { connect } from "react-redux";
 
-import { addComment } from '../redux/action';
+import { addComment ,fetchDishes } from '../redux/action';
+
 
 
 //changes states to props
@@ -25,9 +26,11 @@ const mapStateToProps=state=>{
 }
 
 const mapDispatchToProps=my_dispatched=>({
-    cmt:(dishId,rating,author,comment)=>my_dispatched((addComment(dishId,rating,author,comment)))
-}
+    cmt:(dishId,rating,author,comment)=>my_dispatched((addComment(dishId,rating,author,comment))),
+    fetchDishes:()=>(my_dispatched(fetchDishes()))
+}//////////////
 )
+
 
 
 
@@ -43,22 +46,35 @@ class Main extends Component{
       })
    */
 
+
+    componentDidMount() {
+        this.props.fetchDishes();
+    }
+
+
     render(){
+
         const HomePage =() =>{
             return(
-                <Home dish={this.props.dishes.filter((item)=>item.featured)} 
+                <Home dish={this.props.dishes.finaldish.filter((item)=>item.featured)} 
                  promo={this.props.promotion.filter((item)=>item.featured)}
                  leader={this.props.leader.filter((item)=>item.featured)}
-                 comment={this.props.comment.filter((item)=>item.featured)} />
+                 comment={this.props.comment.filter((item)=>item.featured)}
+                 loadingStatus={this.props.dishes.isLoading}
+                 error={this.props.dishes.errMsg}
+                 />
             )
         }
 
         const Dishdetail=({match})=>{
             return(
                 <div className="">
-                    <DishdetailComponent dish={this.props.dishes.filter((item)=> item.id === parseInt(match.params.dishId,10))[0] }
+                    <DishdetailComponent dish={this.props.dishes.finaldish.filter((item)=> item.id === parseInt(match.params.dishId,10))[0] }
                     comment={this.props.comment.filter((item)=>item.dishId===parseInt(match.params.dishId,10))}
                     addComment={this.props.cmt}
+                    loadingStatus={this.props.dishes.isLoading}
+                    error={this.props.dishes.errMsg}
+                    
                     />
                 </div>
             )
