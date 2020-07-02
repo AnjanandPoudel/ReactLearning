@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import { Breadcrumb,BreadcrumbItem,Col,Label,Button,Row } from 'reactstrap';
 import {Link  } from 'react-router-dom';
-import {LocalForm , Control, Errors} from 'react-redux-form';
+import {Form , Control, Errors} from 'react-redux-form';
 
 
 const required = (val) => val && (val.length);
@@ -24,15 +24,12 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
 class Contact extends Component {
     constructor(){
         super()
-       
-        this.handleSubmit=this.handleSubmit.bind(this)
-     
+        this.handleSubmit=this.handleSubmit.bind(this) 
     }
-
-
 
     handleSubmit(values){
         alert('Show it'+JSON.stringify(values))
+        this.props.resetForm();
     }
 
     render(){
@@ -74,7 +71,7 @@ class Contact extends Component {
                 <div className="row row-content">
                     <h4 className="col-12 col-md-9">Do you want to send feeback or talk about some problems ?</h4>
                     
-                    <LocalForm onSubmit={(values)=> this.handleSubmit(values) } className="col-12 col-md-9">
+                    <Form model="feedback" onSubmit={(values)=> this.handleSubmit(values) } className="col-12 col-md-9">
                         <Row className="form-group" >
                             <Label htmlFor="firstname" md={2} > FirstName </Label>
                             <Col md={10}>
@@ -175,7 +172,7 @@ class Contact extends Component {
                                 <Button type="submit" color="primary" >Send Feedback</Button>
                             </Col>
                         </Row>
-                    </LocalForm>
+                    </Form>
 
                 </div>
             </div>

@@ -6,6 +6,7 @@ import { Component } from 'react';
 import { LocalForm, Control, Errors } from 'react-redux-form';
 import { addComment } from '../redux/action';
 import Loading from "./loading";
+import {baseUrl} from '../shared/baseUrl'
 
 
 class CommentForm extends Component{
@@ -105,36 +106,22 @@ class CommentForm extends Component{
 }
 
 
-function RenderImage(dish,loading,error){
+function RenderImage(dish){
 
-    if(loading){
-        return(
-            <div className=""><Loading /></div>
-        )
-    }
-    else if(error){
-        return(
-            <div className="container">
-                <div className="row">
-                    <h3>Some error has occured</h3>
-                    <p>{error}</p>
-                </div>
-            </div>
-        )
-    }
 
-    else if (dish!==undefined && dish!==null){
-            return(
-                <Card >
-                    <CardImg width="100%" src={dish.image} alt={dish.name} />
-                    <CardBody>
-                        <CardTitle>{dish.name} </CardTitle>
-                        <CardText>{dish.description} </CardText>
-                        
-                    </CardBody>
-                </Card>
-                
-            )
+
+    if (dish!==undefined && dish!==null){
+        return(
+            <Card >
+                <CardImg width="100%" src={baseUrl+dish.image} alt={dish.name} />
+                <CardBody>
+                    <CardTitle>{dish.name} </CardTitle>
+                    <CardText>{dish.description} </CardText>
+                    
+                </CardBody>
+            </Card>
+            
+        )
     }
     else{
         return(
@@ -175,8 +162,23 @@ function RenderComment({comments,dishId,addComment}){
 
 function DishdetailComponent(props){
     console.log(props.dish)
+    if(props.dishload){
+        return(
+            <div className=""><Loading /></div>
+        )
+    }
+    else if(props.error){
+        return(
+            <div className="container">
+                <div className="row">
+                    <h3>Some error has occured</h3>
+                    <p>{props.error}</p>
+                </div>
+            </div>
+        )
+    }
     
-    if(props!==null && props!==undefined){
+    else if(props.dish!==null && props.dish!==undefined){
         
         return(
         <div className="container">
@@ -189,7 +191,7 @@ function DishdetailComponent(props){
             </div>
             <div className=" row">
                 <div className="col-12 col-md-5 m-1">
-                    {RenderImage(props.dish,props.loadingStatus,props.error)}
+                    {RenderImage(props.dish)}
                 </div>
                 <div className="col-12 col-md-5 m-1 ">
                     <RenderComment comments={props.comment} dishId={props.dish.id} addComment={props.addComment} />
@@ -198,6 +200,11 @@ function DishdetailComponent(props){
         </div>
         )
         
+    }
+    else{
+        return(
+            <div className=""></div>
+        )
     }
     
 }

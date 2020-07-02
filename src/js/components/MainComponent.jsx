@@ -6,10 +6,12 @@ import Home from './HomeComponent';
 import About from './AboutComponent';
 import Contact from './contact';
 import DishdetailComponent from './DishdetailComponent';
+
 import {Switch ,Route ,Redirect,withRouter} from 'react-router-dom';
 import { connect } from "react-redux";
+import {actions} from "react-redux-form";
 
-import { addComment ,fetchDishes } from '../redux/action';
+import { addComment ,fetchDishes,fetchComments,fetchPromos } from '../redux/action';
 
 
 
@@ -17,20 +19,22 @@ import { addComment ,fetchDishes } from '../redux/action';
 // connects to ConfigureStore
 const mapStateToProps=state=>{
     return{
-        dishes:state.con_dishes,
-        comment:state.con_comments,
-        promotion:state.con_promotions,
-        leader:state.con_leaders
+        dishes:state.store_dishes,
+        comment:state.store_comments,
+        promotion:state.store_promotions,
+        leader:state.store_leaders
         // used here as props: imported from redux as states
     }
 }
 
-const mapDispatchToProps=my_dispatched=>({
+const mapDispatchToProps=(my_dispatched)=>({
     cmt:(dishId,rating,author,comment)=>my_dispatched((addComment(dishId,rating,author,comment))),
-    fetchDishes:()=>(my_dispatched(fetchDishes()))
-}//////////////
+    fetchDishes:()=>(my_dispatched(fetchDishes())),
+    fetchComments:()=>(my_dispatched(fetchComments())),
+    fetchPromos:()=>(my_dispatched(fetchPromos())),
+    resetForm:()=> {my_dispatched(actions.reset('feedback'))}
+}
 )
-
 
 
 
@@ -49,19 +53,24 @@ class Main extends Component{
 
     componentDidMount() {
         this.props.fetchDishes();
+        this.props.fetchPromos();
+        this.props.fetchComments();
     }
 
 
     render(){
 
         const HomePage =() =>{
+            console.log(this.props.dishes)
             return(
                 <Home dish={this.props.dishes.finaldish.filter((item)=>item.featured)} 
-                 promo={this.props.promotion.filter((item)=>item.featured)}
+                 promo={this.props.promotion.promos.filter((item)=>item.featured)}
                  leader={this.props.leader.filter((item)=>item.featured)}
-                 comment={this.props.comment.filter((item)=>item.featured)}
-                 loadingStatus={this.props.dishes.isLoading}
-                 error={this.props.dishes.errMsg}
+                 comment={this.props.comment.comments.filter((item)=>item.featured)}
+                 dishload={this.props.dishes.isLoading}
+                 disherror={this.props.dishes.errMsg}
+                 promoload={this.props.promotion.isLoading}
+                 promoerror={this.props.promotion.errMsg}
                  />
             )
         }
@@ -70,10 +79,11 @@ class Main extends Component{
             return(
                 <div className="">
                     <DishdetailComponent dish={this.props.dishes.finaldish.filter((item)=> item.id === parseInt(match.params.dishId,10))[0] }
-                    comment={this.props.comment.filter((item)=>item.dishId===parseInt(match.params.dishId,10))}
+                    comment={this.props.comment.comments.filter((item)=>item.dishId===parseInt(match.params.dishId,10))}
                     addComment={this.props.cmt}
-                    loadingStatus={this.props.dishes.isLoading}
-                    error={this.props.dishes.errMsg}
+                    dishload={this.props.dishes.isLoading}
+                    disherror={this.props.dishes.errMsg}
+                    commenterror={this.props.comment.errMsg}
                     
                     />
                 </div>
@@ -89,7 +99,7 @@ class Main extends Component{
                 <Route exact path="/menu" component={()=> <Menu dishes={this.props.dishes} /> }></Route>
                 <Route path="/menu/:dishId" component={Dishdetail} ></Route>
 
-                <Route exact path="/contact_us" component={Contact} ></Route>
+                <Route exact path="/contact_us" component={()=><Contact resetForm={this.props.resetForm} />} ></Route>
                 <Route exact path="/about_us" component={()=> <About leaders={this.props.leader} />} />
                 <Redirect to="/home" />
             </Switch>

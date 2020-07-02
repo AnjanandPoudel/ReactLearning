@@ -3,6 +3,7 @@ import {Card,CardBody,CardTitle,CardText,CardImg, CardSubtitle} from 'reactstrap
 import {Breadcrumb,BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import Loading from "./loading";
+import { baseUrl } from "../shared/baseUrl";
 
 
 
@@ -23,13 +24,15 @@ function RenderImage({item,loading,error}){
             </div>
         )
     }
-    else
-        {return(
+    else if(item!==null && item!==undefined)   
+        {   console.log(item)
+
+            return(
         
                 <div className="">
                     <Card>
                         
-                        <CardImg src={item.image}  />
+                        <CardImg src={baseUrl + item.image}  />
                         <CardBody>
                             <CardTitle className="homecardtitle" > {item.name} </CardTitle>
                             { item.designation ? <CardSubtitle  className="homecardsubstitle" > {item.designation} </CardSubtitle>:null }
@@ -41,6 +44,11 @@ function RenderImage({item,loading,error}){
                 </div>
         
         )}
+    else{
+        return(
+            <div className=""></div>)
+        }
+    
 }
 
 function Home(props){
@@ -69,10 +77,10 @@ function Home(props){
             
             <div className="row">
                 <div className="col-12 col-sm-4">
-                    <RenderImage item={props.dish[0]} loading={props.loadingStatus} error={props.error} />
+                    <RenderImage item={props.dish[0]} loading={props.dishload} error={props.disherror} />
                 </div>
                 <div className="col-12 col-sm-4">
-                    <RenderImage item={props.promo[0]} />
+                    <RenderImage item={props.promo[0]} loading={props.promoload} error={props.promoerror}/>
                 </div>
                 <div className="col-12 col-sm-4">
                     <RenderImage item={props.leader[0]} />
