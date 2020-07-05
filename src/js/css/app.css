@@ -150,8 +150,6 @@ address{
 }
 
 
-
-
 .page-enter {
     opacity: 0.01;
     transform: translateX(-100%);
