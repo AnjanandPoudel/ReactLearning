@@ -4,7 +4,7 @@ import {Breadcrumb,BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom'
 import { Component } from 'react';
 import { LocalForm, Control, Errors } from 'react-redux-form';
-import { addComment } from '../redux/action';
+import { postComment } from '../redux/action';
 import Loading from "./loading";
 import {baseUrl} from '../shared/baseUrl'
 
@@ -26,8 +26,8 @@ class CommentForm extends Component{
 
     handleSubmit=(values)=>{
         this.toggleModal();
-        this.props.addComment(this.props.dishId,values.rating,values.name,values.comment)
-        console.log(addComment(this.props.dishId,values.rating,values.name,values.comment))
+        this.props.postComment(this.props.dishId,values.rating,values.name,values.comment)
+        console.log(postComment(this.props.dishId,values.rating,values.name,values.comment))
 
     }
 
@@ -106,11 +106,26 @@ class CommentForm extends Component{
 }
 
 
-function RenderImage(dish){
+function RenderImage(dish,dishload,disherror){
+    console.log(disherror)
 
+    if(dishload){
+        return(
+            <div className=""><Loading /></div>
+        )
+    }
+    else if(disherror){
+        return(
+            <div className="container">
+                <div className="row col-12 col-md-5 m-5">
+                  <h3>Some error has occured</h3>
+                  <h4>{disherror}</h4>
+              </div>
+            </div>
+        )
+    }
 
-
-    if (dish!==undefined && dish!==null){
+    else if (dish!==undefined && dish!==null){
         return(
             <Card >
                 <CardImg width="100%" src={baseUrl+dish.image} alt={dish.name} />
@@ -131,12 +146,23 @@ function RenderImage(dish){
 }
 
 
-function RenderComment({comments,dishId,addComment}){
+function RenderComment({comments,dish,postComment,commenterror}){
     console.log(comments)
+    console.log(dish)
     let item;
 
+    if(commenterror){
+        return(
+            <div className="container">
+                <div className="row col-12 col-md-5 m-5">
+                  <h3>Some error has occured</h3>
+                  <h4>{commenterror}</h4>
+              </div>
+            </div>
+        )
+    }
 
-    if (comments!==undefined && comments!==null){
+    else if (comments!==undefined && comments!==null){
         item=comments.map(item=>{
         return(
                 <CardBody key={item.id}>
@@ -147,38 +173,33 @@ function RenderComment({comments,dishId,addComment}){
         })
     }
 
-    
-
-
-
-    return(
-        <div>
-            <h2>Comments:</h2>
-            {item}
-            <CommentForm dishId={dishId} addComment={addComment}  />
-        </div>
-    )
-}
-
-function DishdetailComponent(props){
-    console.log(props.dish)
-    if(props.dishload){
+    if(dish!==undefined){
         return(
-            <div className=""><Loading /></div>
-        )
-    }
-    else if(props.error){
-        return(
-            <div className="container">
-                <div className="row">
-                    <h3>Some error has occured</h3>
-                    <p>{props.error}</p>
-                </div>
+            <div>
+                <h2>Comments:</h2>
+                {item}
+                <CommentForm dishId={dish.id} postComment={postComment}  />
             </div>
         )
     }
+    else{
+        return(
+            <div className="">
+                <h2>Comments:</h2>
+                {item}
+            </div>
+        )
+    }
+
     
-    else if(props.dish!==null && props.dish!==undefined){
+}
+
+function DishdetailComponent(props){
+    console.log(props.disherror)
+    console.log(props.dish)
+  
+    
+    if(props.dish!==null){
         
         return(
         <div className="container">
@@ -191,10 +212,10 @@ function DishdetailComponent(props){
             </div>
             <div className=" row">
                 <div className="col-12 col-md-5 m-1">
-                    {RenderImage(props.dish)}
+                    {RenderImage(props.dish,props.dishload,props.disherror)}
                 </div>
                 <div className="col-12 col-md-5 m-1 ">
-                    <RenderComment comments={props.comment} dishId={props.dish.id} addComment={props.addComment} />
+                    <RenderComment comments={props.comment} dish={props.dish} postComment={props.postComment} commenterror={props.commenterror} />
                 </div>
             </div>
         </div>

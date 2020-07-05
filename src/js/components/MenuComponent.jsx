@@ -35,9 +35,9 @@ function Menu(props){
   else if(props.dishes.errMsg){
       return(
           <div className="container">
-              <div className="row">
+              <div className="row col-12 col-md-5 m-5">
                   <h3>Some error has occured</h3>
-                  <p>{props.dishes.errMsg}</p>
+                  <h4>{props.dishes.errMsg}</h4>
               </div>
           </div>
       )

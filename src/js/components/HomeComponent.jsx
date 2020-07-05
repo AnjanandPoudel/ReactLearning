@@ -19,7 +19,7 @@ function RenderImage({item,loading,error}){
             <div className="container">
                 <div className="row">
                     <h3>Some error has occured</h3>
-                    <p>{error}</p>
+                    <h4>{error}</h4>
                 </div>
             </div>
         )
