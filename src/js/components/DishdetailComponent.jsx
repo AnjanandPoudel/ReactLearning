@@ -4,6 +4,8 @@ import {Breadcrumb,BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom'
 import { Component } from 'react';
 import { LocalForm, Control, Errors } from 'react-redux-form';
+import { FadeTransfrom ,Fade,Stagger } from "react-animation-components";
+
 import { postComment } from '../redux/action';
 import Loading from "./loading";
 import {baseUrl} from '../shared/baseUrl'
@@ -161,14 +163,19 @@ function RenderComment({comments,dish,postComment,commenterror}){
             </div>
         )
     }
-
+    
     else if (comments!==undefined && comments!==null){
-        item=comments.map(item=>{
+        item= comments.map(item=>{
+            
+            
         return(
+            
+            <Fade in>
                 <CardBody key={item.id}>
                     <CardText>{item.comment} </CardText>
                     <CardText>  -- {item.author} , {new Intl.DateTimeFormat('en-US' ,{year:'numeric',month:"short",day:"2-digit",hour:"numeric"}).format(new Date(Date.parse(item.date)))} </CardText>
                 </CardBody>
+            </Fade>
         )
         })
     }
@@ -177,7 +184,9 @@ function RenderComment({comments,dish,postComment,commenterror}){
         return(
             <div>
                 <h2>Comments:</h2>
-                {item}
+                <Stagger in>
+                    {item}
+                </Stagger>
                 <CommentForm dishId={dish.id} postComment={postComment}  />
             </div>
         )
