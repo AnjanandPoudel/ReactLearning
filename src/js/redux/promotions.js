@@ -1,4 +1,4 @@
-import * as ActionType from './ActionTypes';
+import * as ActionType from './action'
 
 
 export const Promotions=(state={

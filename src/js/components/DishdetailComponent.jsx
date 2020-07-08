@@ -6,7 +6,7 @@ import { Component } from 'react';
 import { LocalForm, Control, Errors } from 'react-redux-form';
 import { FadeTransfrom ,Fade,Stagger } from "react-animation-components";
 
-import { postComment } from '../redux/ActionCreators';
+import { postComment } from '../redux/action';
 import Loading from "./loading";
 import {baseUrl} from '../shared/baseUrl'
 
@@ -170,8 +170,8 @@ function RenderComment({comments,dish,postComment,commenterror}){
             
         return(
             
-            <Fade in>
-                <CardBody key={item.id}>
+            <Fade in key={item.id}>
+                <CardBody >
                     <CardText>{item.comment} </CardText>
                     <CardText>  -- {item.author} , {new Intl.DateTimeFormat('en-US' ,{year:'numeric',month:"short",day:"2-digit",hour:"numeric"}).format(new Date(Date.parse(item.date)))} </CardText>
                 </CardBody>
@@ -187,7 +187,7 @@ function RenderComment({comments,dish,postComment,commenterror}){
                 <Stagger in>
                     {item}
                 </Stagger>
-                <CommentForm dishId={dish.id} postComment={postComment}  />
+                <CommentForm key={item.id} dishId={dish.id} postComment={postComment}  />
             </div>
         )
     }
@@ -221,9 +221,7 @@ function DishdetailComponent(props){
             </div>
             <div className=" row">
                 <div className="col-12 col-md-5 m-1">
-                    <FadeTransfrom in transfromProps={{exitTransform:'scale(0.1) transformY(-50%)'}}>                    
-                        {RenderImage(props.dish,props.dishload,props.disherror)}
-                    </FadeTransfrom>
+                    {RenderImage(props.dish,props.dishload,props.disherror)}
                 </div>
                 <div className="col-12 col-md-5 m-1 ">
                     <RenderComment comments={props.comment} dish={props.dish} postComment={props.postComment} commenterror={props.commenterror} />

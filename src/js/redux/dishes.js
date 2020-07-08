@@ -1,4 +1,4 @@
-import * as ActionTypes from './ActionTypes';
+import * as ActionTypes from './action';
 
 export const Dishes = (state = { isLoading: true,
     errMsg: null,
