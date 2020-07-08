@@ -1,6 +1,9 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from "../shared/baseUrl";
+import Loading from './loading';
+
 
 
 function RenderLeader(props){
@@ -9,7 +12,7 @@ function RenderLeader(props){
             <div className="m-4">
                 <Media>
                     <Media left href="/none">
-                        <Media object src={leader.image} width="100" className="mr-5 m-1"/>
+                        <Media object src={baseUrl+ leader.image} width="100" className="mr-5 m-1"/>
                     </Media>
     
                     <Media body>
@@ -26,11 +29,35 @@ function RenderLeader(props){
             </div>
         )
     })
-    return(
-        <div className="">
-            {leader}
-        </div>
-    )
+    if(props.leaderLoading){
+        return(
+            <Loading />
+        )
+    }
+    else if(props.leaderError){
+        return(
+            <div className="container">
+                <div className="row">
+                    <h3>Some error has occured</h3>
+                    <h4>{props.leaderError}</h4>
+                </div>
+            </div>
+        )
+    }
+    
+   
+    else if(props.leader){
+        return(
+            <div className="">
+                {leader}
+            </div>
+        )
+    }
+    else{
+        return(
+            <div className=""></div>
+        )
+    }
 }
 
 function About(props) {
@@ -103,7 +130,7 @@ function About(props) {
                 </div>
                 <div className="col-12">
                     <Media list>
-                        <RenderLeader leader={props.leaders} />
+                        <RenderLeader leader={props.leaders} leaderError={props.leaderError} leaderLoading={props.leaderLoading} />
                     </Media>
                 </div>
 

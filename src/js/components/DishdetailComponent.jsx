@@ -6,7 +6,7 @@ import { Component } from 'react';
 import { LocalForm, Control, Errors } from 'react-redux-form';
 import { FadeTransfrom ,Fade,Stagger } from "react-animation-components";
 
-import { postComment } from '../redux/action';
+import { postComment } from '../redux/ActionCreators';
 import Loading from "./loading";
 import {baseUrl} from '../shared/baseUrl'
 
@@ -208,7 +208,7 @@ function DishdetailComponent(props){
     console.log(props.dish)
   
     
-    if(props.dish!==null){
+    if(props.dish!==null && props.dish!==undefined){
         
         return(
         <div className="container">
@@ -221,7 +221,9 @@ function DishdetailComponent(props){
             </div>
             <div className=" row">
                 <div className="col-12 col-md-5 m-1">
-                    {RenderImage(props.dish,props.dishload,props.disherror)}
+                    <FadeTransfrom in transfromProps={{exitTransform:'scale(0.1) transformY(-50%)'}}>                    
+                        {RenderImage(props.dish,props.dishload,props.disherror)}
+                    </FadeTransfrom>
                 </div>
                 <div className="col-12 col-md-5 m-1 ">
                     <RenderComment comments={props.comment} dish={props.dish} postComment={props.postComment} commenterror={props.commenterror} />

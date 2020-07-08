@@ -4,6 +4,7 @@ import {Link  } from 'react-router-dom';
 import {Form , Control, Errors} from 'react-redux-form';
 
 
+
 const required = (val) => val && (val.length);
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength=len=>(val)=> (val )&& (val.length >= len);
@@ -28,12 +29,11 @@ class Contact extends Component {
     }
 
     handleSubmit(values){
-        alert('Show it'+JSON.stringify(values))
+        this.props.postFeedback(values.firstname,values.lastname,values.telnum,values.email,values.rememberme,values.contacttype,values.message)
         this.props.resetForm();
     }
 
     render(){
-       
         return(
             <div className="container">
                 <div className="row">
