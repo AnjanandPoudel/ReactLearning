@@ -3,12 +3,14 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'r
 import { Link } from 'react-router-dom';
 import { baseUrl } from "../shared/baseUrl";
 import Loading from './loading';
+import {Fade , Stagger} from 'react-animation-components'
 
 
 
 function RenderLeader(props){
     let leader=props.leader.map((leader)=>{
         return(
+            <Fade in>
             <div className="m-4">
                 <Media>
                     <Media left href="/none">
@@ -27,6 +29,7 @@ function RenderLeader(props){
                         
                 </Media>
             </div>
+            </Fade>
         )
     })
     if(props.leaderLoading){
@@ -49,7 +52,9 @@ function RenderLeader(props){
     else if(props.leader){
         return(
             <div className="">
-                {leader}
+                <Stagger in>
+                    {leader}
+                </Stagger>
             </div>
         )
     }

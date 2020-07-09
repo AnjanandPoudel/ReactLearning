@@ -133,7 +133,7 @@ export const fetchComments = () => (dispatch) => {
         }
       },
       error => {
-            var errmess = "Comment error";
+            var errmess = "Comment error  "+error.message;
             throw errmess;
       })
     .then(response => response.json())
@@ -247,7 +247,6 @@ export const postFeedback=(fname,lname,ph,email,rememberme,contacttype,message)=
         contacttype:contacttype,
         message:message
     }
-    console.log(newFeedback)
     return fetch(baseUrl+'feedback',{
         method:"POST",
         body:JSON.stringify(newFeedback),

@@ -31,9 +31,12 @@ class Contact extends Component {
     handleSubmit(values){
         this.props.postFeedback(values.firstname,values.lastname,values.telnum,values.email,values.rememberme,values.contacttype,values.message)
         this.props.resetForm();
+
     }
 
+
     render(){
+
         return(
             <div className="container">
                 <div className="row">
@@ -155,7 +158,7 @@ class Contact extends Component {
                            <Col md={{size:3 ,offset:2}}>
                                 <Control.select className="form-control" model=".contacttype" name="contacttype"  >
                                 <option>Not Choosed</option>
-                                <option>Tel</option>
+                                <option value="tel">Tel</option>
                                 <option>phone</option>
 
                                 </Control.select>

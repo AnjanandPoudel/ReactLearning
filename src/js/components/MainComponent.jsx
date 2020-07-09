@@ -24,7 +24,7 @@ const mapStateToProps=state=>{
         comment:state.store_comments,
         promotion:state.store_promotions,
         leader:state.store_leaders,
-        feedback:state.feedback
+        feedInfo:state.store_feedback
         // used here as props: imported from redux as states
     }
 }
@@ -64,8 +64,8 @@ class Main extends Component{
 
     render(){
 
-            console.log(this.props.feedback)
-
+        console.log(this.props.feedInfo)
+        console.log(this.props.comment)
         
 
         const HomePage =() =>{
@@ -112,8 +112,8 @@ class Main extends Component{
             return(
                 <Contact resetForm={this.props.resetForm}
                  postFeedback={this.props.postFeedback}
-/*                  feedback={this.props.feedback}
- */
+                 feedInfo={this.props.feedInfo}
+
                  />
             )
         }
