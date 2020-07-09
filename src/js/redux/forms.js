@@ -1,12 +1,16 @@
-export const InitialFeedback={
-    firstname:'',
-    lastname:'',
-    telnum:'',
-    email:'',
-    rememberme:false,
-    contacttype:'Tel.',
-    message:''
 
+import * as ActionTypes from "./ActionTypes";
+
+
+
+export const InitialFeedback=(state={
+    feedbackInfo:[],
+    },
+    action     )=>{
+    switch (action.type){
+    
+        default:
+            return state
+    }
 }
-
 

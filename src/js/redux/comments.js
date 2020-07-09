@@ -1,4 +1,4 @@
-import * as ActionType from './action'
+import * as ActionType from './ActionTypes';
 
 
 

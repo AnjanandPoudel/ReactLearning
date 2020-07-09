@@ -4,6 +4,7 @@ import {Link  } from 'react-router-dom';
 import {Form , Control, Errors} from 'react-redux-form';
 
 
+
 const required = (val) => val && (val.length);
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength=len=>(val)=> (val )&& (val.length >= len);
@@ -28,12 +29,11 @@ class Contact extends Component {
     }
 
     handleSubmit(values){
-        alert('Show it'+JSON.stringify(values))
+        this.props.postFeedback(values.firstname,values.lastname,values.telnum,values.email,values.rememberme,values.contacttype,values.message)
         this.props.resetForm();
     }
 
     render(){
-       
         return(
             <div className="container">
                 <div className="row">
@@ -154,6 +154,7 @@ class Contact extends Component {
                            </Col>
                            <Col md={{size:3 ,offset:2}}>
                                 <Control.select className="form-control" model=".contacttype" name="contacttype"  >
+                                <option>Not Choosed</option>
                                 <option>Tel</option>
                                 <option>phone</option>
 
@@ -161,7 +162,7 @@ class Contact extends Component {
                            </Col>
                         </Row>
                         <Row className="form-group">
-                            <Label md={2} htmlFor="feedback"> Your Feedback</Label>
+                            <Label md={2} htmlFor="message"> Your Feedback</Label>
                             <Col md={10}>
                                 <Control.textarea model=".message" placeholder="Your feedback" rows={12} name='message' id="message" className="form-control"
                                 />
