@@ -10,7 +10,7 @@ import {Fade , Stagger} from 'react-animation-components'
 function RenderLeader(props){
     let leader=props.leader.map((leader)=>{
         return(
-            <Fade in>
+            <Fade in key={leader.id}>
             <div className="m-4">
                 <Media>
                     <Media left href="/none">
@@ -69,7 +69,7 @@ function About(props) {
 
     const leaders = props.leaders.map((leader) => {
         return (
-            <p>Leader {leader.name}</p>
+            <p key={leader.id}>Leader {leader.name}</p>
         );
     });
 

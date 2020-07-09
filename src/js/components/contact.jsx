@@ -33,10 +33,20 @@ class Contact extends Component {
         this.props.resetForm();
 
     }
+    showFeedback=()=>{
+        if(this.props.feedInfo.feedbackInfo.id){
+            alert(JSON.stringify(this.props.feedInfo.feedbackInfo))
+            window.location.reload(false)
+        }
+    }
+
+    componentDidMount(){
+        this.showFeedback()
+
+    }
 
 
     render(){
-
         return(
             <div className="container">
                 <div className="row">
